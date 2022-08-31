@@ -1,5 +1,7 @@
 #!/usr/bin/zsh
 
+cd "$( dirname "$0" )"
+
 # Install zsh
 echo 'Install oh-my-zsh'
 echo '-----------------'
@@ -22,8 +24,7 @@ rm -f $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
 # Activate z
-cd ~/.dotfiles/shell
-chmod +x z.sh
+chmod +x ./shell/z.sh
 
 echo 'Install NVM'
 echo '----------------'
