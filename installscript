@@ -39,7 +39,7 @@ nvm use 18
 
 echo 'Install PHP'
 echo '----------------'
-sudo apt-get install -y php8.1 php8.1-xml php8.1-redis php8.1-imap php8.1-intl php8.1-gmagick php8.1-soap php8.1-zip php8.1-apcu php8.1-xdebug php8.1-mailparse
+sudo apt-get install -y php php-xml php-redis php-imap php-intl php-gmagick php-soap php-gd php-curl php-zip php-apcu php-xdebug php-mailparse
 
 echo 'Install Image Dependencies'
 echo '----------------'
