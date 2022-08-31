@@ -25,3 +25,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run install script
         run: yes | ./bootstrap
+
+      - name: Install apps & defaults
+        run: |
+          sh ./linux/apps.sh
+          sh ./linux/set-defaults.sh
