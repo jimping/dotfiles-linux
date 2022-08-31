@@ -26,13 +26,21 @@ ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 # Activate z
 chmod +x ./shell/z.sh
 
-echo 'Install NVM'
+echo 'Install NVM and Node'
 echo '----------------'
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
+nvm install 18
+nvm use 18
+
 echo 'Install PHP'
 echo '----------------'
-sudo apt-get install php
+sudo apt-get install php php-pear php-xml php-redis php-imap php-intl php-gmagick php-soap php-zip php-apcu php-xdebug php-mailparse
+
+echo 'Install Image Dependencies'
+echo '----------------'
+sudo apt-get install jpegoptim optipng pngquant gifsicle webp
+sudo npm install -g svgo@1.3.2
 
 echo 'Install composer'
 echo '----------------'
@@ -55,18 +63,9 @@ sudo ln -s $HOME/.dotfiles/misc/php-limits.ini /etc/php/8.1/cli/conf.d/php-z-cus
 echo 'Set right composer path'
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 
-echo 'Install laravel envoy'
-echo '---------------------'
-composer global require "laravel/envoy=~2.0"
-
 echo 'Install laravel installer'
 echo '---------------------'
 composer global require laravel/installer
-
-echo 'Install node'
-echo '------------'
-nvm install 18
-nvm use 18
 
 echo 'Install hub (https://github.com/github/hub)'
 echo '----------------'
@@ -118,7 +117,6 @@ pip3 install mkdocs && pip3 install mkdocs-material
 echo 'Init Git'
 git config --global init.defaultBranch main
 git config --global push.default current
-
 
 
 echo '++++++++++++++++++++++++++++++'

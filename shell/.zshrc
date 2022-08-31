@@ -61,8 +61,14 @@ unset file
 # Sudoless npm https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md
 NPM_PACKAGES="${HOME}/.npm-packages"
 
-export PATH="$PATH:$NPM_PACKAGES/bin"
-export PATH=$HOME/.dotfiles/bin:$PATH
+# Extra paths
+export PATH="$HOME/.local/bin:$PATH" # thefuck and python
+export PATH="$HOME/.composer/vendor/bin:$PATH" #composer
+export PATH="$PATH:$NPM_PACKAGES/bin" # NodeJS
+export PATH=$HOME/.dotfiles/bin:$PATH # Own executables
+
+# Added by Toolbox App
+export PATH="$PATH:/home/$DEFAULT_USER/.local/share/JetBrains/Toolbox/scripts"
 
 # Import ssh keys in keychain
 ssh-add -A 2>/dev/null;
@@ -70,18 +76,12 @@ ssh-add -A 2>/dev/null;
 # Setup xdebug
 export XDEBUG_CONFIG="idekey=PHPSTORM"
 
-# Extra paths
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-
 export UID=$(id -u)
 export GID=$(id -g)
 
 # Alias hub to git
 eval "$(hub alias -s)"
 eval $(thefuck --alias)
-
-# Added by Toolbox App
-export PATH="$PATH:/home/$DEFAULT_USER/.local/share/JetBrains/Toolbox/scripts"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
