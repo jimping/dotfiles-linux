@@ -1,0 +1,127 @@
+#!/usr/bin/zsh
+
+# Install zsh
+echo 'Install oh-my-zsh'
+echo '-----------------'
+rm -rf $HOME/.oh-my-zsh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+# Add global gitignore
+rm -f $HOME/.global-gitignore
+ln -s $HOME/.dotfiles/shell/.global-gitignore $HOME/.global-gitignore
+git config --global core.excludesfile $HOME/.global-gitignore
+
+# Symlink zsh prefs
+rm -f $HOME/.zshrc
+ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
+
+# Symlink vim prefs
+rm -f $HOME/.vimrc
+ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
+rm -f $HOME/.vim
+ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
+
+# Activate z
+cd ~/.dotfiles/shell
+chmod +x z.sh
+
+echo 'Install NVM'
+echo '----------------'
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+echo 'Install PHP'
+echo '----------------'
+sudo apt-get install php
+
+echo 'Install composer'
+echo '----------------'
+EXPECTED_COMPOSER_CHECKSUM="$(curl https://composer.github.io/installer.sig)"
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ACTUAL_COMPOSER_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"
+if [ "$EXPECTED_COMPOSER_CHECKSUM" != "$ACTUAL_COMPOSER_CHECKSUM" ]
+then
+    >&2 echo 'ERROR: Invalid installer checksum'
+    rm composer-setup.php
+    exit 1
+fi
+php composer-setup.php
+rm composer-setup.php
+sudo mv composer.phar /usr/local/bin/composer
+
+sudo ln -s $HOME/.dotfiles/misc/php-limits.ini /etc/php/8.1/apache2/conf.d/php-z-custom-limits.ini
+sudo ln -s $HOME/.dotfiles/misc/php-limits.ini /etc/php/8.1/cli/conf.d/php-z-custom-limits.ini
+
+echo 'Set right composer path'
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+echo 'Install laravel envoy'
+echo '---------------------'
+composer global require "laravel/envoy=~2.0"
+
+echo 'Install laravel installer'
+echo '---------------------'
+composer global require laravel/installer
+
+echo 'Install node'
+echo '------------'
+nvm install 18
+nvm use 18
+
+echo 'Install hub (https://github.com/github/hub)'
+echo '----------------'
+sudo apt install hub
+
+echo 'Install docker'
+echo '----------------'
+sudo apt-get update
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
+echo 'Install thefuck'
+echo '----------------'
+sudo apt update
+sudo apt install python3-dev python3-pip python3-setuptools
+pip3 install thefuck --user
+
+echo 'Install ngrok'
+echo '----------------'
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+
+echo 'Install mkdocs'
+echo '--------------'
+pip3 install mkdocs && pip3 install mkdocs-material
+
+echo 'Init Git'
+git config --global init.defaultBranch main
+git config --global push.default current
+
+
+
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'
+echo 'All done!'
+echo '++++++++++++++++++++++++++++++'
+echo 'Some optional tidbits'
+
+echo '1. Make sure dropbox is running first. If you have not backed up via Mackup yet, then run `mackup backup` to symlink preferences for a wide collection of apps to your dropbox. If you already had a backup via mackup run `mackup restore` You'\''ll find more info on Mackup here: https://github.com/lra/mackup.'
+echo '2. Set some sensible defaults by running: $HOME/.dotfiles/linux/set-defaults.sh'
+echo '3. Install some helpful apps by running: $HOME/.dotfiles/linux/apps.sh'
+echo '4. Make a .dotfiles-custom/shell/.aliases for your personal commands'
+echo '5. Office 365, Cloudya and Sonos can not be installed automatically. Please do to manually if you want to.'
+
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'

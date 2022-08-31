@@ -1,0 +1,84 @@
+# PHP
+alias phpunit="vendor/bin/phpunit"
+alias phpunitw="phpunit-watcher watch"
+alias a="php artisan"
+alias ar="php artisan remote"
+alias c="composer"
+alias cu="composer update"
+alias cr="composer require"
+alias ci="composer install"
+alias cda="composer dump-autoload -o"
+alias deploy='envoy run deploy'
+alias deploy-code='envoy run deploy-code'
+alias mfs='php artisan migrate:fresh --seed'
+alias nah='git reset --hard;git clean -df'
+
+alias pp="php artisan test --parallel"
+alias d="php artisan dusk"
+alias sshconfig="vi ~/.ssh/config"
+alias copykey='command cat ~/.ssh/id_rsa.public | pbcopy'
+alias sail='./vendor/bin/sail'
+
+# JavaScript
+alias nrw="npm run watch"
+alias nrb="npm run build"
+alias nrp="npm run prod"
+alias nrd="npm run dev"
+alias nrh="npm run hot"
+alias nrpl="npm run prod-local"
+
+alias ys="yarn serve"
+alias yd="yarn dev"
+alias yb="yarn build"
+
+# Git
+alias gc="git checkout"
+alias gcl="git clone"
+alias gpo="git push origin"
+alias gm="git merge"
+alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# Docker
+alias dc="docker compose"
+alias dcu="docker compose up -d"
+
+# Fast open
+alias o="open ."
+
+# List all files colorized in long format
+alias l="ls -laF"
+
+# PhpStorm
+alias pstorm='phpstorm'
+
+# Redis
+alias flush-redis="redis-cli FLUSHALL"
+
+# IP addresses and ports
+alias ip="curl https://diagnostic.opendns.com/myip ; echo"
+alias localip="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+alias ops="sudo lsof -iTCP -sTCP:LISTEN -n -P"
+
+# Enable aliases to be sudo’ed
+alias sudo='sudo '
+
+# Scape webpage
+alias scrape="scrapeUrl"
+
+# Switch NPM
+alias npmnpm="npm config set registry https://registry.npmjs.org"
+alias npmspl="npm config set registry https://npm.splintnet.com"
+alias npm5="npm config set registry https://npm.5-anker.com"
+
+# Folders
+alias c="cd ~/Code"
+alias ws="cd ~/Code/Sites"
+alias desk="cd ~/Desktop"
+alias dl="cd ~/Downloads"
+
+# SSH
+alias sshc="ssh-copy-id -i ~/.ssh/id_rsa $1"
+
+# Other
+alias star="tar -cvf"
+alias untar="tar -xvf"
