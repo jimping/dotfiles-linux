@@ -121,6 +121,7 @@ pip3 install mkdocs && pip3 install mkdocs-material
 echo 'Init Git'
 git config --global init.defaultBranch main
 git config --global push.default current
+git config --global hub.protocol ssh
 
 
 echo '++++++++++++++++++++++++++++++'
