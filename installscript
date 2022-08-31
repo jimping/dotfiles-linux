@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-cd "$( dirname "$0" )"
+export DIR=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 
 # Install zsh
 echo 'Install oh-my-zsh'
@@ -10,18 +10,18 @@ curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/in
 
 # Add global gitignore
 rm -f $HOME/.global-gitignore
-ln -s $HOME/.dotfiles/shell/.global-gitignore $HOME/.global-gitignore
+ln -s $DIR/shell/.global-gitignore $HOME/.global-gitignore
 git config --global core.excludesfile $HOME/.global-gitignore
 
 # Symlink zsh prefs
 rm -f $HOME/.zshrc
-ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
+ln -s $DIR/shell/.zshrc $HOME/.zshrc
 
 # Symlink vim prefs
 rm -f $HOME/.vimrc
-ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
+ln -s $DIR/shell/.vimrc $HOME/.vimrc
 rm -f $HOME/.vim
-ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
+ln -s $DIR/shell/.vim $HOME/.vim
 
 # Activate z
 chmod +x ./shell/z.sh
@@ -61,8 +61,8 @@ php composer-setup.php
 rm composer-setup.php
 sudo mv composer.phar /usr/local/bin/composer
 
-sudo ln -s $HOME/.dotfiles/misc/php-limits.ini /etc/php/8.1/apache2/conf.d/php-z-custom-limits.ini
-sudo ln -s $HOME/.dotfiles/misc/php-limits.ini /etc/php/8.1/cli/conf.d/php-z-custom-limits.ini
+sudo ln -s $DIR/misc/php-limits.ini /etc/php/8.1/apache2/conf.d/php-z-custom-limits.ini
+sudo ln -s $DIR/misc/php-limits.ini /etc/php/8.1/cli/conf.d/php-z-custom-limits.ini
 
 echo 'Set right composer path'
 export PATH="$HOME/.composer/vendor/bin:$PATH"
