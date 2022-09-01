@@ -75,6 +75,10 @@ echo 'Install hub (https://github.com/github/hub)'
 echo '----------------'
 sudo apt install -y hub
 
+echo 'Install gnome-screensaver'
+echo '----------------'
+sudo apt-get install gnome-screensaver
+
 echo 'Install docker'
 echo '----------------'
 sudo apt-get update
@@ -98,7 +102,7 @@ echo 'Install DDEV'
 echo '----------------'
 curl https://apt.fury.io/drud/gpg.key | sudo apt-key add -
 echo "deb https://apt.fury.io/drud/ * *" | sudo tee -a /etc/apt/sources.list.d/ddev.list
-sudo apt update && sudo apt install -y ddev mkcert
+sudo apt update && sudo apt install -y ddev mkcert && mkcert -install
 
 echo 'Install thefuck'
 echo '----------------'
