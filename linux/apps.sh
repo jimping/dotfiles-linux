@@ -4,6 +4,9 @@ sudo apt-get install -y terminator
 # Filezilla
 sudo apt-get install -y filezilla
 
+# Typecatcher
+sudo apt-get install -y typecatcher
+
 # Flatpak Apps
 # Slack
 # Thunderbird
