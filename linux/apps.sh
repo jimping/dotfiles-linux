@@ -1,5 +1,8 @@
 # Terminator
-sudo apt-get install terminator
+sudo apt-get install -y terminator
+
+# Filezilla
+sudo apt-get install -y filezilla
 
 # Flatpak Apps
 # Slack
