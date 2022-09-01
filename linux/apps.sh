@@ -19,3 +19,8 @@ fi
 
 # BabelEdit
 sudo apt-get install -y libopengl0 && wget -O $HOME/BabelEdit-3.0.1.deb https://www.codeandweb.com/download/babeledit/3.0.1/BabelEdit-3.0.1.deb && sudo dpkg -i $HOME/BabelEdit-3.0.1.deb && rm -rf $HOME/BabelEdit-3.0.1.deb
+
+# Google Fonts
+sudo mkdir -p /usr/share/fonts
+sudo git clone https://github.com/google/fonts.git /usr/share/fonts/google-fonts
+sudo fc-cache -fv
